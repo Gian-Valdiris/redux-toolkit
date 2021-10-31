@@ -2,7 +2,16 @@
   text-align: center;
 }
 .btn{
+  background-color: #282c34 !important;
   margin: 10px 10px !important;
+}
+.images{
+  display: flex;
+  flex-wrap: wrap;
+}
+.images .card{
+  margin: 10px;
+  border: 1px solid #000;
 }
 .App-logo {
   height: 40vmin;
