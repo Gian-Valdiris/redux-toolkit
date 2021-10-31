@@ -1,21 +1,31 @@
 import React from "react";
 import { Button, Card } from "antd";
 import "antd/dist/antd.css";
-import { addImg, getDataApi } from "../redux/slice/reducerImg";
+import { getDataApi,deleteImages } from "../redux/slice/reducerImg";
 import { useDispatch, useSelector } from "react-redux";
-// Importando las acciones
+
 function Load() {
+ 
   const dispatch = useDispatch();
   const { entities } = useSelector((state) => state.reducerImage);
+  
   const handleClick = (event) => {
     dispatch(getDataApi("https://rickandmortyapi.com/api/character/"));
   };
+  
+  const handleClickDeleteImages=(event)=>{
+    dispatch(deleteImages());
+  }
+  
   return (
     <div className="container">
       <Button type="primary" size="large" className="btn" onClick={handleClick}>
         Cargar Data
       </Button>
-      {entities && (
+      <Button type="default" size="large" className="btn" onClick={handleClickDeleteImages}>
+        Eliminar Data 
+      </Button>
+      {entities ? (
         <div className="images">
           {entities.map((i) => (
             <Card
@@ -29,6 +39,10 @@ function Load() {
             </Card>
           ))}
         </div>
+      ):(
+        <h2>
+          No hay imagenes para renderizar
+        </h2>
       )}
     </div>
   );

@@ -1,4 +1,3 @@
-
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -7,6 +6,10 @@ export const getDataApi= createAsyncThunk('MyReducerOne/obteniendoData',async(ur
   const {data} = await axios.get(url);
   return data.results.map(({name,id,image})=>({name,id,image}))
 })
+// recordar que  a mi createAsyncThunk es que le voy a hacer el dispatch
+
+
+
 //esta es una forma de crear un reducer con el metodo createSlice
 const MyReducerOne = createSlice({
   name:'reducer1',
@@ -17,14 +20,13 @@ const MyReducerOne = createSlice({
   reducers:{
     /*lo que viene aqui son las acciones de mi reducer, entonces el nombre de la funcion
     es el nombre de la accion a la cual voy a hacer dispath*/
-    addImg(state,action){
-      state.push('Hola add Img')
+    deleteImages(state,action){
+      state.entities=null
     }
   },
   extraReducers:(builder)=>{
     // esto lo agrego porque es de createAsyncThunk
     /**
-     * 
      * fulfilled ->osea que ya retorno algo 
      * pending -> esta cargando 
      * entonces estas son unas acciones que se disparan gracias a redux-toolkit , el sabe cuando llamar a cada una 
@@ -42,5 +44,5 @@ const MyReducerOne = createSlice({
 // y exporto las acciones de mi reducer y el reducerEnSi
 const {actions,reducer} =MyReducerOne;
 //Exportar las acciones
-export const {addImg} = actions;
+export const {deleteImages} = actions;
 export default reducer
